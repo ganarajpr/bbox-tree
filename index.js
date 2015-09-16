@@ -1,4 +1,4 @@
-var Polygon = require("polygon");
+var Polygon = require("./polygon");
 //boxes is an array of arrays -
 // each array is of the form [startX,startY,endX,endY,...whatever];
 
@@ -32,7 +32,7 @@ function isInside(box,containerBox){
         //startX,startY
         [box[0],box[3]]
     ]);
-    return containerPolygon.contains(currentPolygon);
+    return containerPolygon.containsPolygon(currentPolygon);
 }
 
 function isInsideNode(node,parentNode){
