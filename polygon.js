@@ -1,8 +1,51 @@
-var Vec2 = require('vec2');
 var segseg = require('segseg');
 var isArray = function(a) {
     return Object.prototype.toString.call(a) === "[object Array]";
 };
+/*******/
+
+
+function Vec2(x, y) {
+  if (!(this instanceof Vec2)) {
+    return new Vec2(x, y);
+  }
+
+  if (isArray(x)) {
+    y = x[1];
+    x = x[0];
+  } else if('object' === typeof x && x) {
+    y = x.y;
+    x = x.x;
+  }
+
+  this.x = Vec2.clean(x || 0);
+  this.y = Vec2.clean(y || 0);
+}
+Vec2.precision = 8;
+var p = Math.pow(10, Vec2.precision);
+Vec2.fromArray = function(array, ctor) {
+    return new (ctor || Vec2)(array[0], array[1]);
+  };
+
+Vec2.clean = function(val) {
+    if (isNaN(val)) {
+      throw new Error('NaN detected');
+    }
+
+    if (!isFinite(val)) {
+      throw new Error('Infinity detected');
+    }
+
+    if(Math.round(val) === val) {
+      return val;
+    }
+
+    return Math.round(val * p)/p;
+  };
+
+  /*******/
+
+
 
 function Polygon(points) {
     if (points instanceof Polygon) {

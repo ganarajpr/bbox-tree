@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "segseg": "^0.2.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
