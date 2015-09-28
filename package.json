@@ -1,6 +1,6 @@
 {
   "name": "bbox-tree",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Convert an array of bounding boxes into a hierarchy ( tree )",
   "main": "index.js",
   "scripts": {
