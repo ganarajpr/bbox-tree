@@ -39,22 +39,26 @@ function isInsideNode(node,parentNode){
     return isInside(node.data,parentNode.data);
 }
 
+function remove(nodes,removables){
+    for (var i = removables.length - 1; i >= 0 ; i--) {
+        nodes.splice(removables[i],1);
+    }
+}
+
 function insertInto(parentNode,node) {
     var foundNode = false;
+    var removables = [];
     for (var i = 0; i < parentNode.children.length; i++) {
         if(isInsideNode(node,parentNode.children[i])){
             foundNode = true;
             insertInto(parentNode.children[i],node);
-            break;
         }
         else if(isInsideNode(parentNode.children[i],node)){
-            foundNode = true;
-            var currentNode = parentNode.children.splice(i,1);
-            parentNode.children.push(node);
-            node.children.push(currentNode);
-            break;
+            node.children.push(parentNode.children[i]);
+            removables.push(i);
         }
     }
+    remove(parentNode.children,removables);
     if(!foundNode){
         parentNode.children.push(node);
     }

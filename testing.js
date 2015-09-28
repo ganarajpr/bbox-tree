@@ -41,7 +41,7 @@ function convertTree(node,destNode){
     }
 }
 
-loadJsonFile('test/1_bb.json')
+loadJsonFile('test/test.json')
     .then(function (json) {
         return json.boxes.map(function (box) {
             return [
@@ -55,5 +55,6 @@ loadJsonFile('test/1_bb.json')
     })
     .then(function(boxes){
         var tree = boxtree(boxes);
+        console.log(tree);
         console.log(convertTree(tree));
     });
